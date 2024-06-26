@@ -13,6 +13,10 @@ const upload = multer({ storage: storage });
 
 app.use(express.json());
 
+//Home route
+app.get('/', (req, res) => {
+  res.send('Both tasks done. Upload csv route: "/upload" and Get asset-wise balance route:"/getBalance"');});
+
 // Route for uploading CSV file
 app.post("/upload", upload.single("file"), async (req, res) => {
   try {
