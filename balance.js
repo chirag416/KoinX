@@ -2,14 +2,13 @@ const Trade = require('./models/Trade');
 
 async function getAssetBalances(timestamp) {
   try {
-    // Query trades before or at the specified timestamp
+
     const trades = await Trade.find({ utcTime: { $lte: new Date(timestamp) } });
 
-    // Initialize balance map with integers for precision
+    
     const balanceMap = {};
-    const precisionFactor = 100; // Multiply by 100 for two decimal places
+    const precisionFactor = 100;
 
-    // Calculate asset balances (using integer multiplication)
     trades.forEach(trade => {
       const { baseCoin, buySellAmount, operation } = trade;
       const adjustedAmount = Math.round(buySellAmount * precisionFactor);
@@ -25,7 +24,6 @@ async function getAssetBalances(timestamp) {
       }
     });
 
-    // Prepare response object with non-zero balances
     const assetBalances = {};
     Object.keys(balanceMap).forEach(asset => {
       if (balanceMap[asset] !== 0) {

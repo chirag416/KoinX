@@ -11,7 +11,6 @@ const app = express();
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage }); 
 
-// Middleware to parse JSON bodies
 app.use(express.json());
 
 // Route for uploading CSV file
